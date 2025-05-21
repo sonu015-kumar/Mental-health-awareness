@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mental Health Chat Support</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+  <h2 class="mb-4 text-center">Mental Health Chat Support</h2>
+
+  <form method="POST" class="mb-4">
+    <label for="question_index" class="form-label">Select a question you're concerned about:</label>
+    <select class="form-select" name="question_index" id="question_index" required>
+      <option value="">Choose a symptom-related question</option>
+      {% for q, _ in questions %}
+        <option value="{{ loop.index0 }}">{{ q }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Get Support</button>
+  </form>
+
+  {% if selected_question %}
+    <div class="alert alert-secondary mt-4">
+      <h5><strong>Q:</strong> {{ selected_question }}</h5>
+      <p><strong>A:</strong> {{ answer }}</p>
+    </div>
+  {% endif %}
+
+  <div class="mt-4">
+    <a href="{{ url_for('home') }}" class="btn btn-link">← Back to BDI Quiz</a>
+  </div>
+</body>
+</html>
